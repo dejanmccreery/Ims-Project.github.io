@@ -64,7 +64,7 @@ public class ItemDAO implements Dao<Item> {
 	public Item create(Item item) { //Creating overide method for the item DAO
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO items(name, description, price, stock) VALUES (?, ?, ?, ?)");) {
+						.prepareStatement("INSERT INTO items(itemname, description, price, stock) VALUES (?, ?, ?, ?)");) {
 			statement.setString(1, item.getItemname());
 			statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
@@ -98,7 +98,7 @@ public class ItemDAO implements Dao<Item> {
 	public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE items SET name = ?, description = ?, price = ?, stock = ? WHERE id = ?");) {
+						.prepareStatement("UPDATE items SET itemname = ?, description = ?, price = ?, stock = ? WHERE id = ?");) {
 			statement.setString(1, item.getItemname());
 			statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
