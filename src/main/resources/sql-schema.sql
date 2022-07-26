@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     FOREIGN KEY(fk_user_id) REFERENCES user(id)
     );
 
-    CREATE TABLE IF NOT EXISTS `ims`.`itemorder` (
+    CREATE TABLE IF NOT EXISTS `ims`.`orderdetails` (
     `fk_order_id` BIGINT(15) NOT NULL,
     `fk_item_id` BIGINT(15) NOT NULL,
     `quantity` INT(15) NOT NULL,
