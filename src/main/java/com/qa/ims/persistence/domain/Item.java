@@ -18,6 +18,12 @@ public class Item {
         this.setStock(stock);
     }
 
+    public Item(Long id, String itemname, String description) {
+        this.setId(id);
+        this.setItemname(itemname);
+        this.setDescription(description);
+    }
+
     public Item(Long id, String itemname, String description, Double price, Double stock) {
         this.id = id;
         this.itemname = itemname;
@@ -66,30 +72,6 @@ public class Item {
         this.stock = stock;
     }
 
-    public Item id(Long id) {
-        setId(id);
-        return this;
-    }
-
-    public Item itemname(String itemname) {
-        setItemname(itemname);
-        return this;
-    }
-
-    public Item description(String description) {
-        setDescription(description);
-        return this;
-    }
-
-    public Item price(Double price) {
-        setPrice(price);
-        return this;
-    }
-
-    public Item stock(Double stock) {
-        setStock(stock);
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {
