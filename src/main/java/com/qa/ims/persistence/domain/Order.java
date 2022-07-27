@@ -1,5 +1,6 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Order {
@@ -8,6 +9,24 @@ public class Order {
     private Long quantity;
     private Long itemID;
     private long customerID;
+
+
+    private List<OrderDetails> items;
+
+
+    public void setCustomerID(long customerID) {
+        this.customerID = customerID;
+    }
+
+    public List<OrderDetails> getItems() {
+        return this.items;
+    }
+
+    public void setItems(List<OrderDetails> items) {
+        this.items = items;
+    }
+
+ 
 
     public Order(Long customerID, Long itemID, Long quantity) {
         this.customerID = customerID;
@@ -80,6 +99,10 @@ public class Order {
         }
         Order order = (Order) o;
         return Objects.equals(id, order.id) && Objects.equals(quantity, order.quantity) && Objects.equals(itemID, order.itemID) && customerID == order.customerID;
+    }
+
+    public Long getID() {
+        return null;
     }
 
 }
