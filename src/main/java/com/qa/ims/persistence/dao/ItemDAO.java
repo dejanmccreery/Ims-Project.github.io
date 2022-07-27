@@ -24,7 +24,9 @@ public class ItemDAO implements Dao<Item> {
         Long id = resultSet.getLong("id");
         String itemname = resultSet.getString("itemname");
         String description = resultSet.getString("description");
-        return new Item(id, itemname, description);
+		Double price = resultSet.getDouble("price");
+		Double stock = resultSet.getDouble("stock");
+        return new Item(id, itemname, description, price, stock);
     }
 
 
