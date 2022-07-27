@@ -21,16 +21,15 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
 CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `id` INT(15) NOT NULL AUTO_INCREMENT,
     `fk_customer_id` INT(15) NOT NULL,
-    `fk_item_id` INT(15),
-    `quantity` INT(15),
     PRIMARY KEY (`id`),
     FOREIGN KEY(fk_customer_id) REFERENCES customers(id),
-    FOREIGN KEY(fk_item_id) REFERENCES items(id)
     );
     
     CREATE TABLE IF NOT EXISTS `ims`.`orderdetails` (
+    `id` INT(15) NOT NULL AUTO_INCREMENT,
     `fk_order_id` INT(15) NOT NULL,
     `fk_item_id` INT(15) NOT NULL,
+    `quantity` INT(15),
     FOREIGN KEY(fk_item_id) REFERENCES items(id),
     FOREIGN KEY(fk_order_id) REFERENCES orders(id)
 );
