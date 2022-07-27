@@ -27,8 +27,9 @@ public class Order {
         this.customerID = customerID;
     }
 
-    public Order(Long id) {
-        this.id = id;
+
+    public Order(Long customerID) {
+        this.customerID = customerID;
     }
 
 
@@ -65,8 +66,6 @@ public class Order {
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", quantity='" + getQuantity() + "'" +
-            ", itemID='" + getItemID() + "'" +
             ", customerID='" + getCustomerID() + "'" +
             "}";
     }
