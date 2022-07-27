@@ -31,5 +31,6 @@ CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `fk_item_id` INT(15) NOT NULL,
     `quantity` INT(15),
     FOREIGN KEY(fk_item_id) REFERENCES items(id),
-    FOREIGN KEY(fk_order_id) REFERENCES orders(id)
+    FOREIGN KEY(fk_order_id) REFERENCES orders(id),
+    PRIMARY KEY (`id`)
 );
