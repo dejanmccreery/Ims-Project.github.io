@@ -9,6 +9,12 @@ public class Order {
     private Long itemID;
     private long customerID;
 
+    public Order(Long customerID, Long itemID, Long quantity) {
+        this.customerID = customerID;
+        this.itemID = itemID;
+        this.quantity = quantity;
+    }
+
     public Order(Long id, Long customerID, Long itemID, Long quantity) {
         this.id = id;
         this.customerID = customerID;
@@ -16,10 +22,15 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public Order (Long customerID, Long itemID) {
+    public Order (Long id, Long customerID) {
+        this.id = id;
         this.customerID = customerID;
-        this.itemID = itemID;
     }
+
+    public Order(Long id) {
+        this.id = id;
+    }
+
 
     public Long getId() {
         return this.id;

@@ -32,6 +32,14 @@ public class Item {
         this.stock = stock;
     }
 
+    public Item(Long id, String itemname, String description, Double price, double stock) {
+        this.id = id;
+        this.itemname = itemname;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
+
     public Long getId() {
         return this.id;
     }
