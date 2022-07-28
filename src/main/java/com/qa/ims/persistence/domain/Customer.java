@@ -6,6 +6,7 @@ public class Customer {
 	private String firstName;
 	private String surname;
 
+
 	public Customer(String firstName, String surname) {
 		this.setFirstName(firstName);
 		this.setSurname(surname);
@@ -43,7 +44,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer ID: " + id + " First name: " + firstName.toUpperCase() + " Surname: " + surname.toUpperCase();
+		return "Customer ID: " + id + " First name: " + firstName + " Surname: " + surname;
 	}
 
 	@Override
