@@ -5,8 +5,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.dao.OrderDetailsDAO;
+import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderDetails;
 import com.qa.ims.utils.Utils;
@@ -18,12 +20,14 @@ public class OrderController implements CrudController<Order> {
     private OrderDAO orderDAO;
     private OrderDetailsDAO orderDetailsDAO;
     private Utils utils;
+    private ItemDAO itemDAO;
 
-    public OrderController(OrderDAO orderDAO, OrderDetailsDAO orderDetailsDAO, Utils utils) {
+    public OrderController(OrderDAO orderDAO, OrderDetailsDAO orderDetailsDAO, Utils utils, ItemDAO itemDAO) {
         super();
         this.orderDAO = orderDAO;
         this.orderDetailsDAO = orderDetailsDAO;
         this.utils = utils;
+        this.itemDAO = itemDAO;
     }
 
 
@@ -31,8 +35,17 @@ public class OrderController implements CrudController<Order> {
     public List<Order> readAll() {
         List<Order> orders = orderDAO.readAll();
         for (Order order: orders) {
-            List<OrderDetails> items = orderDetailsDAO.readAll(order.getId());
-            order.setItems(items);
+            List<OrderDetails> orderDetails = orderDetailsDAO.readAll(order.getId());
+            order.setItems(orderDetails);
+            for (OrderDetails orderDetail: orderDetails) {
+                Long quantity = orderDetail.getQuantity();
+                Long itemID = orderDetail.getItemID();
+                Item item = itemDAO.read(itemID);
+                Double price = item.getPrice();
+
+                Double totalprice = price * quantity;
+                LOGGER.info("The total price of this order is: £" + totalprice);
+            }
         }
         return orders;
     }
@@ -45,7 +58,6 @@ public class OrderController implements CrudController<Order> {
 		LOGGER.info("Order created");
 		return order;
     }
-
 
     @Override
     public int delete() {
