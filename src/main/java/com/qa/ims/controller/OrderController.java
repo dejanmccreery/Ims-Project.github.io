@@ -133,8 +133,11 @@ public class OrderController implements CrudController<Order> {
     
         Order order = orderDAO.read(orderID);
         OrderDetails orderdetails = orderDetailsDAO.create(new OrderDetails(orderID, itemId, quantity));
-        LOGGER.info(orderdetails);
-        LOGGER.info(order);
+        if (orderdetails != null) {
+            LOGGER.info("You've updated the order!" + orderdetails); //stopping the print when an incorrect item order ID is entered
+        }
+        
+
 
         return order;
     }
