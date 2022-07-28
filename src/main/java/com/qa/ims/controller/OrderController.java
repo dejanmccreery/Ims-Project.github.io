@@ -50,9 +50,41 @@ public class OrderController implements CrudController<Order> {
 
     @Override
     public int delete() {
-		LOGGER.info("Please enter the id of the order you would like to delete");
-		Long id = utils.getLong();
-		return orderDAO.delete(id);
+
+        LOGGER.info("Please choose a delete option:\n To delete a specific item from an order press 1\n To delete an entire order press 2\n");
+        String choice = utils.getString().toUpperCase();
+       
+
+        switch (choice) {
+			case "1":
+                LOGGER.info("Please enter the order ID");
+                Long id = utils.getLong();
+                LOGGER.info("Please enter the item ID");
+                Long itemID = utils.getLong();
+                orderDetailsDAO.delete(id, itemID);
+                return 0;
+			case "2":
+                Long orderid = utils.getLong();
+                orderDetailsDAO.deleteall(orderid);
+                orderDAO.delete(orderid);
+                return 0;
+			case "RETURN":
+				break;
+			default:
+				break;
+			}
+        return 0;
+		
+
+    }
+
+   
+    public OrderDetails deleteitemfromorder() {
+        LOGGER.info("Please enter the order ID");
+        Long id = utils.getLong();
+        LOGGER.info("Please enter the item ID");
+        Long itemID = utils.getLong();
+        return orderDetailsDAO.delete(id, itemID);
 
     }
 
