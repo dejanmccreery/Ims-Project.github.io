@@ -9,8 +9,6 @@ public class Order {
     private Long quantity;
     private Long itemID;
     private long customerID;
-
-
     private List<OrderDetails> items;
 
 
@@ -103,6 +101,9 @@ public class Order {
 
     public Long getID() {
         return null;
+    }
+
+    public void getPrice() {
     }
 
 }

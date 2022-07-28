@@ -7,6 +7,7 @@ public class OrderDetails {
     private Long quantity;
     private Long itemID;
     private Long orderID;
+    private Double price;
 
     public OrderDetails() {
 
@@ -24,7 +25,9 @@ public class OrderDetails {
         this.orderID = orderID;
         this.itemID = itemID;
     }
-
+public Double getPrice() {
+    return this.price;
+}
 
 
     public Long getQuantity() {
