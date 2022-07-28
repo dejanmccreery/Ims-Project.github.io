@@ -37,11 +37,11 @@ public class OrderDetails {
 
     @Override
     public String toString() {
-        return "{" +
-            " quantity='" + getQuantity() + "'" +
-            ", itemID='" + getItemID() + "'" +
-            ", orderID='" + getOrderID() + "'" +
-            "}";
+        return 
+            " OrderID: " + getOrderID() +
+            " ItemID: " + getItemID() +
+            " Quantity: " + getQuantity() 
+            ;
     }
 
     public Long getItemID() {
