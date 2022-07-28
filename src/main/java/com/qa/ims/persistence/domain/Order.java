@@ -83,10 +83,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", customerID='" + getCustomerID() + "'" +
-            "}";
+        return
+            "Order ID: " + getId() +
+            " CustomerID: " + getCustomerID()
+            ;
     }
 
 
