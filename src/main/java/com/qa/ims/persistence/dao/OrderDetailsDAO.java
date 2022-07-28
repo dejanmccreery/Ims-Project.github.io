@@ -99,12 +99,12 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
     statement.setLong(2, orderdetails.getItemID());
     statement.setLong(3, orderdetails.getQuantity());
     statement.executeUpdate();
-    return read(orderdetails.getOrderID());
+    return orderdetails;
 } catch (Exception e) {
     LOGGER.debug(e);
     LOGGER.error(e.getMessage());
 }
-        return null;
+        return orderdetails;
     }
     
 
