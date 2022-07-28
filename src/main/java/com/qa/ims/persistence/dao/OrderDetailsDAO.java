@@ -80,14 +80,12 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 
     @Override
     public OrderDetails update(OrderDetails t) {
-        // TODO Auto-generated method stub
         return null;
     }
 
 
     @Override
     public List<OrderDetails> readAll() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -112,7 +110,6 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 
     @Override
     public OrderDetails read(Long id) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -120,7 +117,6 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 
     @Override
     public int delete(long id) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
