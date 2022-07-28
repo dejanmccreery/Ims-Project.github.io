@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.utils.DBUtils;
+import com.mysql.cj.protocol.Resultset;
 import com.qa.ims.persistence.domain.OrderDetails;
 
 
@@ -23,11 +24,15 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 
     public List<OrderDetails> readAll(Long orderID) {
         try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM OrderDetails WHERE fk_order_id = ?");) {
-			statement.setLong(1, orderID);
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orderdetails od join orders o on o.id=od.fk_order_id join items i" +
+                 " on i.id=fk_item_id join customers c on c.id=fk_customer_id  WHERE od.fk_order_id = ?");) {  // Joining all the tables so i can call them in next stage instead of FKs
+                    statement.setLong(1, orderID);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				List<OrderDetails> OrderDetails = new ArrayList<>();
 				while (resultSet.next()) {
+                    LOGGER.info("Order ID: " + resultSet.getLong("o.id") + "  Customer name: " + resultSet.getString("c.first_name") + " " + resultSet.getString("c.surname") +
+                    "   Item Ordered: " + resultSet.getString("i.itemname") + "    Price: " + resultSet.getLong("i.price") +
+                    "   Quantity Ordered: " + resultSet.getLong("od.quantity") + "   Order Status: CONFIRMED!"); // printing all details i want in my 
 					OrderDetails.add(modelFromResultSet(resultSet));
 				}
 				return OrderDetails;
