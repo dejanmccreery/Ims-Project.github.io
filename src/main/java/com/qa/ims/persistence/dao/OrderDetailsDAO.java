@@ -41,11 +41,11 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 
 
 
-    public OrderDetails delete(OrderDetails orderdetails) {
+    public OrderDetails delete(Long orderID, Long itemID) {
         try (Connection connection = DBUtils.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM OrderDetails WHERE fk_order_id = ? AND fk_item_id = ?");) {
-    statement.setLong(1, orderdetails.getOrderID());
-    statement.setLong(1, orderdetails.getItemID());
+    statement.setLong(1, orderID);
+    statement.setLong(2, itemID);
     statement.executeUpdate();
 } catch (Exception e) {
     LOGGER.debug(e);
@@ -53,6 +53,20 @@ public class OrderDetailsDAO implements Dao<OrderDetails> {
 }
         return null;
     }
+
+
+    public OrderDetails deleteall(Long id) {
+    try (Connection connection = DBUtils.getInstance().getConnection();
+    PreparedStatement statement = connection.prepareStatement("DELETE FROM OrderDetails WHERE fk_order_id = ?");) {
+    statement.setLong(1, id);
+    statement.executeUpdate();
+} catch (Exception e) {
+    LOGGER.debug(e);
+    LOGGER.error(e.getMessage());
+}
+    return null;
+}
+
 
 
     public OrderDetails modelFromResultSet(ResultSet resultSet) throws SQLException {
