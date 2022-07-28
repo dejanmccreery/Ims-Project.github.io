@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.dao.OrderDetailsDAO;
+import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderDetails;
@@ -21,13 +23,15 @@ public class OrderController implements CrudController<Order> {
     private OrderDetailsDAO orderDetailsDAO;
     private Utils utils;
     private ItemDAO itemDAO;
+    private CustomerDAO customerDAO;
 
-    public OrderController(OrderDAO orderDAO, OrderDetailsDAO orderDetailsDAO, Utils utils, ItemDAO itemDAO) {
+    public OrderController(OrderDAO orderDAO, OrderDetailsDAO orderDetailsDAO, Utils utils, ItemDAO itemDAO, CustomerDAO customerDAO) {
         super();
         this.orderDAO = orderDAO;
         this.orderDetailsDAO = orderDetailsDAO;
         this.utils = utils;
         this.itemDAO = itemDAO;
+        this.customerDAO = customerDAO;
     }
 
 
@@ -35,17 +39,32 @@ public class OrderController implements CrudController<Order> {
     public List<Order> readAll() {
         List<Order> orders = orderDAO.readAll();
         for (Order order: orders) {
-            List<OrderDetails> orderDetails = orderDetailsDAO.readAll(order.getId());
-            order.setItems(orderDetails);
-            for (OrderDetails orderDetail: orderDetails) {
-                Long quantity = orderDetail.getQuantity();
-                Long itemID = orderDetail.getItemID();
-                Item item = itemDAO.read(itemID);
-                Double price = item.getPrice();
 
-                Double totalprice = price * quantity;
-                LOGGER.info("The total price of this order is: £" + totalprice);
-            }
+            Long orderID = order.getId();
+            List<OrderDetails> orderDetailsList = orderDetailsDAO.readAll(orderID); //Get all items from order
+
+            Long customerID = order.getCustomerID();
+            Customer customer = customerDAO.read(customerID); //Get the customer related to the order
+
+            String firstName = customer.getFirstName(); //customer info
+            String surName = customer.getSurname(); 
+            LOGGER.info(orderID + "   " + firstName + "   " + surName); //printing TODO: create stringbuilder after testing
+
+            double totalcost = 0; //assign new variable to 0
+            for (OrderDetails orderDetails: orderDetailsList) { //loop through orderdetails list 
+                Long quantity = orderDetails.getQuantity(); //get item quantity
+                Long itemID = orderDetails.getItemID(); //get item ID
+                Item item = itemDAO.read(itemID); //Using itemID to get Item class
+                String desc = item.getDescription(); //adding description
+                Double price = item.getPrice(); //get price from Item
+                totalcost = totalcost + (price * quantity); // calculate cost and add to totalcost
+                String itemName = item.getItemname(); //get item name
+                LOGGER.info("Item: " + itemName + "   " + "Price: " + price + "   " + "Description: " + desc + "   " 
+                + "Quantity: " + quantity.intValue() + "   " + "Subtotal: " + (price * quantity)); //printing -- Stringbuilder after testing
+            }   
+
+
+            LOGGER.info("The total price of this order is: " + totalcost); //print total cost TODO: order.gettotalcost
         }
         return orders;
     }
