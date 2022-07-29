@@ -1,4 +1,4 @@
-Coverage: 34%
+Coverage: 34% - JIRA LINK - [https://justaglitch.atlassian.net/jira/software/projects/IP](https://justaglitch.atlassian.net/jira/software/projects/IP/boards/2)
 # Inventory Management Project
 
 Project designed to implement CRUD functionality within an application which utilises SQL database and jabva to build a user ordering system program that runs within the command line.
