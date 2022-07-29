@@ -48,7 +48,7 @@ public class OrderController implements CrudController<Order> {
 
             String firstName = customer.getFirstName(); //customer info
             String surName = customer.getSurname(); 
-            LOGGER.info(orderID + "   " + firstName + "   " + surName); //printing TODO: create stringbuilder after testing
+            LOGGER.info("Order ID: " + orderID + "   " + firstName + "   " + surName); //printing TODO: create stringbuilder after testing
 
             double totalcost = 0; //assign new variable to 0
             for (OrderDetails orderDetails: orderDetailsList) { //loop through orderdetails list 
@@ -64,7 +64,7 @@ public class OrderController implements CrudController<Order> {
             }   
 
 
-            LOGGER.info("The total price of this order is: " + totalcost); //print total cost TODO: order.gettotalcost
+            LOGGER.info("The total price of this order is: " + totalcost); //print total cost
         }
         return orders;
     }

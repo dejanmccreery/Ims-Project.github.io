@@ -59,7 +59,6 @@ public class DBUtils {
 				try (Statement statement = connection.createStatement();) {
 					return statement.executeUpdate(string);
 				} catch (Exception e) {
-					LOGGER.debug(e);
 					return 0;
 				}
 			}).reduce((acc, next) -> acc + next).orElse(0);
